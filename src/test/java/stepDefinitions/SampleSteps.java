@@ -100,4 +100,20 @@ public class SampleSteps {
     public void iAmOnActionPage() {
         driver.get("https://kristinek.github.io/site/examples/actions");
     }
+
+    @When("^I am on the locators page$")
+    public void iAmOnTheLocatorsPage() {
+        driver.get("https://kristinek.github.io/site/examples/locators");
+    }
+
+    @Then("^I should see both locators page headers$")
+    public void iShouldSeeBothLocatorsPageHeaders() {
+        assertTrue( driver.findElement(By.xpath("//*[@id='heading_1']")).isDisplayed() );
+        assertTrue( driver.findElement(By.xpath("//*[@id='heading_2']")).isDisplayed() );
+    }
+
+    @And("^Buttons in Locators page are clickable$")
+    public void buttonsInLocatorsPageAreClickable() {
+        driver.findElements(By.xpath("//*[@type='button']")).forEach( b -> assertTrue(b.isEnabled() ));
+    }
 }
