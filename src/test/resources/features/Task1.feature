@@ -7,7 +7,7 @@ Feature: Introduction to cucumber practical task 1
     Given I am on the tested page
 
   @InvalidInput
-  Scenario Outline: Invalid number
+  Scenario Outline: Error cases
     When I enter a number "<number>"
     And press the submit button
     Then I see an error message: "<errorMessage>"
@@ -32,8 +32,17 @@ Feature: Introduction to cucumber practical task 1
       | -1     | Number is too small |
 
   @ValidInput
-  Scenario: A valid number
+  Scenario: A random valid number
     When I enter a number in the range 50-100
+    And press the submit button
+    Then a pop-up appears with a square-root of that number rounded to two decimal places
+
+  @ValidInput
+  Scenario: Valid lower and upper  boundary
+    When I enter the smallest valid number
+    And press the submit button
+    Then a pop-up appears with a square-root of that number rounded to two decimal places
+    Then I enter the largest valid number
     And press the submit button
     Then a pop-up appears with a square-root of that number rounded to two decimal places
 

@@ -86,4 +86,14 @@ public class Task1Steps {
             aPopUpAppearsWithASquareRootOfTheNumberRoundedToTwoDecimalPlaces();
         }
     }
+
+    @When("^I enter the smallest valid number$")
+    public void iEnterTheSmallestValidNumber() throws Throwable {
+        iEnterANumber("50");
+    }
+
+    @Then("^I enter the largest valid number$")
+    public void iEnterTheLargestValidNumber() throws Throwable {
+        iEnterANumber("100");
+    }
 }
