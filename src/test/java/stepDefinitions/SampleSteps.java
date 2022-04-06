@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,8 +12,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SampleSteps {
     private WebDriver driver;
@@ -106,6 +106,7 @@ public class SampleSteps {
         driver.get("https://kristinek.github.io/site/examples/locators");
     }
 
+    //************************************************
     @Then("^I should see both locators page headers$")
     public void iShouldSeeBothLocatorsPageHeaders() {
         assertTrue( driver.findElement(By.xpath("//*[@id='heading_1']")).isDisplayed() );
@@ -114,6 +115,24 @@ public class SampleSteps {
 
     @And("^Buttons in Locators page are clickable$")
     public void buttonsInLocatorsPageAreClickable() {
-        driver.findElements(By.xpath("//*[@type='button']")).forEach( b -> assertTrue(b.isEnabled() ));
+        driver.findElements(By.xpath("//*[@type='button']")).forEach( b -> {
+            assertTrue(b.isEnabled());
+            System.out.println(b.getAttribute("value"));
+        });
+    }
+
+    @Then("^I see error: \"([^\"]*)\"$")
+    public void iSeeError(String arg0) throws Throwable {
+        System.out.println(driver.findElement(By.xpath("//*[@id='error']")).getText() );
+        assertEquals(
+                arg0,
+                driver.findElement(By.xpath("//*[@id='error']")).getText()
+        );
+    }
+
+    @And("^I am not navigated to age message page$")
+    public void iAmNotNavigatedToAgeMessagePage() {
+        String targetUrl = "https://kristinek.github.io/site/examples/age_2.html";
+        assertFalse( driver.getCurrentUrl().contains(targetUrl));
     }
 }
