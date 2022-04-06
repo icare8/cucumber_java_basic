@@ -3,7 +3,7 @@ Feature: Introduction to cucumber part 3
   As a test engineer
   I want to be able to write and execute a scenario outline
 
-  @debugs
+  @debugs1
   Scenario Outline: a new scenario outline
     Given I am on age page
     When I enter name: "<name>"
@@ -20,4 +20,26 @@ Feature: Introduction to cucumber part 3
     Examples:
       | name | age | message                   |
       | Tom  | 15  | Hello, Tom, you are a kid |
+
+  # URL: https://kristinek.github.io/site/tasks/provide_feedback
+  # Navigate to page
+  # Set name and age based on test Examples
+  # Click "Send" button and verify that previous input is displayed in correct fields
+  @debugs2
+  Scenario Outline: outline for the feedback page
+    Given I am on feedback page
+    When I enter name for feedback: "<name>"
+    And I enter age for feedback: <age>
+    And I click send
+    Then I see my name on the new page: "<name>"
+    And I see my age on the new page: "<age>"
+    @working
+    Examples:
+      | name  | age |
+      | Ann   | 5   |
+      | Marry | 50  |
+      | Bob   | 61  |
+
+
+
 

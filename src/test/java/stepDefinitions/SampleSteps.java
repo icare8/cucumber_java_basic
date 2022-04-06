@@ -135,4 +135,39 @@ public class SampleSteps {
         String targetUrl = "https://kristinek.github.io/site/examples/age_2.html";
         assertFalse( driver.getCurrentUrl().contains(targetUrl));
     }
+
+    @Given("^I am on feedback page$")
+    public void iAmOnFeedbackPage() {
+        driver.get("https://kristinek.github.io/site/tasks/provide_feedback");
+    }
+
+    @When("^I enter name for feedback: \"([^\"]*)\"$")
+    public void iEnterNameForFeedback(String nameArg) throws Throwable {
+        driver.findElement(By.id("fb_name")).clear();
+        driver.findElement(By.id("fb_name")).sendKeys(nameArg);
+    }
+
+    @And("^I enter age for feedback: (\\d+)$")
+    public void iEnterAgeForFeedbackAge(String ageArg) {
+        driver.findElement(By.id("fb_age")).clear();
+        driver.findElement(By.id("fb_age")).sendKeys(ageArg);
+    }
+
+    @And("^I click send$")
+    public void iClickSend() {
+        System.out.println(driver.findElement(By.cssSelector(".w3-btn-block.w3-blue.w3-section")) );
+        driver.findElement(By.cssSelector(".w3-btn-block.w3-blue.w3-section")).click();
+    }
+
+    @Then("^I see my name on the new page: \"([^\"]*)\"$")
+    public void iSeeMyNameOnTheNewPage(String arg0) throws Throwable {
+        assertEquals(arg0, driver.findElement(By.id("name")).getText() );
+    }
+
+
+    @And("^I see my age on the new page: \"([^\"]*)\"$")
+    public void iSeeMyAgeOnTheNewPage(String arg0) throws Throwable {
+        assertEquals(arg0, driver.findElement(By.id("age")).getText() );
+
+    }
 }

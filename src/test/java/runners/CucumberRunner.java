@@ -11,7 +11,8 @@ import org.junit.runner.RunWith;
                 "junit:cucumber-report/junit-report.xml",
                 "json:cucumber-report/json-report.json"},
 //        tags = {"~@test", "~@bug"},
-        tags = {"@TestTag, @AdditionalTest"},
+        tags = {"@debugs2"},
+        dryRun = false,
         glue = {"stepDefinitions"}
 )
 public class CucumberRunner {
